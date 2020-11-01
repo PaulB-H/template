@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>LaJawab</title>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+		/>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+				scroll-behavior: smooth;
+				scrollbar-width: thin;
+			}
+			.d-none {
+				display: none;
+			}
+
+			#root {
+				position: relative;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+			}
+
+			#sidenav {
+				position: fixed;
+				right: 0;
+				top: 50%;
+				display: flex;
+				flex-direction: column;
+				align-items: flex-end;
+			}
+			#sidenav p {
+				padding: 3px 3px;
+			}
+			.active {
+				font-weight: bolder;
+				border-bottom: 2px solid red;
+			}
+
+			#home {
+				background-color: lightblue;
+			}
+			#menu {
+				background-color: lightgreen;
+			}
+			#social {
+				background-color: lightpink;
+			}
+
+			.section {
+			}
+
+			#footer {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				text-align: center;
+				background-color: rgb(240, 240, 240);
+				padding-bottom: 3px;
+				font-family: sans-serif;
+				font-size: small;
+			}
+
+			@media only screen {
+				#root {
+					background-color: #fff;
+				}
+			}
+			@media only screen and (max-width: 1023px) {
+				#root {
+					background-color: #fff;
+				}
+			}
+
+			@media only screen and (max-width: 767px) {
+				#root {
+					background-color: #fff;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="root">
+			<div id="sidenav">
+				<h3>Nav</h3>
+				<p class="active homeref link" onclick="scrollto('home')">
+					Home
+				</p>
+				<p class="menuref link" onclick="scrollto('menu')">Menu</p>
+				<p class="socialref link" onclick="scrollto('social')">
+					Social
+				</p>
+			</div>
+
+			<div id="home" class="section">
+				<h1 class="">Home</h1>
+			</div>
+
+			<div id="menu" class="section">
+				<h1 class="">Menu</h1>
+			</div>
+
+			<div id="social" class="section">
+				<h1 class="">Social</h1>
+			</div>
+
+			<div id="footer">devbypaul</div>
+		</div>
+		<script>
+			const rootdiv = document.getElementById("root");
+			const sections = document.querySelectorAll(".section");
+
+			let display = "";
+
+			window.addEventListener("resize", resize);
+			function resize() {
+				root.style.minHeight = window.innerHeight + "px";
+				sections.forEach(function (item) {
+					item.style.minHeight = window.innerHeight + "px";
+				});
+				if (window.innerWidth < 768) {
+					display = "phone";
+					console.log(display);
+				} else if (window.innerWidth < 1024) {
+					display = "tablet";
+					console.log(display);
+				} else {
+					display = "desktop";
+					console.log(display);
+				}
+			}
+			resize();
+
+			window.addEventListener("scroll", scrollscript);
+			function scrollscript() {
+				let pageloc = window.pageYOffset;
+				let homeloc = document.getElementById("home").offsetTop;
+				let menuloc = document.getElementById("menu").offsetTop;
+				let socialloc = document.getElementById("social").offsetTop;
+				let guide;
+
+				if (pageloc < menuloc) {
+					guide = "home";
+				} else if (pageloc >= menuloc && pageloc < socialloc) {
+					guide = "menu";
+				} else {
+					guide = "social";
+				}
+
+				document
+					.querySelectorAll(".link")
+					.forEach(function (item, index) {
+						item.classList.remove("active");
+					});
+
+				document.querySelector(`.${guide}ref`).classList.add("active");
+			}
+
+			let activeDiv = "home";
+
+			function scrollto(dest) {
+				let target = document.getElementById(`${dest}`);
+				window.scrollTo(0, target.offsetTop);
+			}
+		</script>
+	</body>
+</html>
