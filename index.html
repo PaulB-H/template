@@ -169,7 +169,10 @@
 
 			function scrollto(dest) {
 				let target = document.getElementById(`${dest}`);
-				target.scrollIntoView();
+				// target.scrollIntoView();
+				seamless.elementScrollIntoView(target, {
+					behavior: "smooth",
+				});
 				// seamless.scrollTo(0, target.offsetTop);
 			}
 		</script>
