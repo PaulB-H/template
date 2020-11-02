@@ -177,6 +177,7 @@
 				{ passive: false }
 			);
 			document.addEventListener("touchend", function (e) {
+				e.preventDefault();
 				let touchEnd = e.changedTouches[0].clientY;
 				if (touchStart > touchEnd + 5) {
 					//Down
