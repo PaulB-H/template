@@ -147,7 +147,7 @@
 
 				var delta = e.deltaY;
 				if (delta < 0) {
-					console.log("Up");
+					//Up
 					if (guide === "home") {
 						//Do nothing
 					} else if (guide === "menu") {
@@ -156,11 +156,43 @@
 						scrollto("menu");
 					}
 				} else {
-					console.log("Down");
+					//Down
 					if (guide === "social") {
 						//Do nothing
 					} else if (guide === "menu") {
 						scrollto("social");
+					} else {
+						scrollto("menu");
+					}
+				}
+			});
+
+			let touchStart;
+			document.addEventListener(
+				"touchstart",
+				function (e) {
+					e.preventDefault();
+					touchStart = e.touches[0].clientY;
+				},
+				{ passive: false }
+			);
+			document.addEventListener("touchend", function (e) {
+				let touchEnd = e.changedTouches[0].clientY;
+				if (touchStart > touchEnd + 5) {
+					//Down
+					if (guide === "social") {
+						//Do nothing
+					} else if (guide === "menu") {
+						scrollto("social");
+					} else {
+						scrollto("menu");
+					}
+				} else if (touchStart < touchEnd - 5) {
+					//Up
+					if (guide === "home") {
+						//Do nothing
+					} else if (guide === "menu") {
+						scrollto("home");
 					} else {
 						scrollto("menu");
 					}
