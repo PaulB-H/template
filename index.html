@@ -140,13 +140,39 @@
 			}
 			resize();
 
+			let guide = "home";
+
+			document.addEventListener("wheel", function (e) {
+				e.preventDefault();
+
+				var delta = e.deltaY;
+				if (delta < 0) {
+					console.log("Up");
+					if (guide === "home") {
+						//Do nothing
+					} else if (guide === "menu") {
+						scrollto("home");
+					} else {
+						scrollto("menu");
+					}
+				} else {
+					console.log("Down");
+					if (guide === "social") {
+						//Do nothing
+					} else if (guide === "menu") {
+						scrollto("social");
+					} else {
+						scrollto("menu");
+					}
+				}
+			});
+
 			window.addEventListener("scroll", scrollscript);
 			function scrollscript() {
 				let pageloc = window.pageYOffset;
 				let homeloc = document.getElementById("home").offsetTop;
 				let menuloc = document.getElementById("menu").offsetTop;
 				let socialloc = document.getElementById("social").offsetTop;
-				let guide;
 
 				if (pageloc < menuloc) {
 					guide = "home";
@@ -165,15 +191,12 @@
 				document.querySelector(`.${guide}ref`).classList.add("active");
 			}
 
-			let activeDiv = "home";
-
 			function scrollto(dest) {
 				let target = document.getElementById(`${dest}`);
-				// target.scrollIntoView();
-				seamless.elementScrollIntoView(target, {
-					behavior: "smooth",
-				});
-				// seamless.scrollTo(0, target.offsetTop);
+				target.scrollIntoView();
+				// seamless.elementScrollIntoView(target, {
+				// 	behavior: "smooth",
+				// });
 			}
 		</script>
 	</body>
