@@ -188,8 +188,10 @@
 							//Do nothing
 						} else if (guide === "menu") {
 							scrollto("social");
+							guide = "social";
 						} else {
 							scrollto("menu");
+							guide = "menu";
 						}
 					} else if (touchStart < touchEnd) {
 						// touchEnd -5
@@ -210,8 +212,9 @@
 			function scrollscript() {
 				let pageloc = window.pageYOffset;
 				let homeloc = document.getElementById("home").offsetTop;
-				let menuloc = document.getElementById("menu").offsetTop;
-				let socialloc = document.getElementById("social").offsetTop;
+				let menuloc = document.getElementById("menu").offsetTop - 100;
+				let socialloc =
+					document.getElementById("social").offsetTop - 100;
 
 				if (pageloc < menuloc) {
 					guide = "home";
