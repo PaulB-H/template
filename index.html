@@ -181,7 +181,8 @@
 				function (e) {
 					e.preventDefault();
 					let touchEnd = e.changedTouches[0].clientY;
-					if (touchStart > touchEnd + 5) {
+					if (touchStart > touchEnd) {
+						// touchEnd +5
 						//Down
 						if (guide === "social") {
 							//Do nothing
@@ -190,7 +191,8 @@
 						} else {
 							scrollto("menu");
 						}
-					} else if (touchStart < touchEnd - 5) {
+					} else if (touchStart < touchEnd) {
+						// touchEnd -5
 						//Up
 						if (guide === "home") {
 							//Do nothing
